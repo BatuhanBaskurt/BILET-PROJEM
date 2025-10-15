@@ -1,0 +1,784 @@
+/* === Genel Ayarlar === */
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background: url("foto/wallpaper.jpg") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+
+/* === Login Kutusu (hafif açık mavimsi cam) === */
+form {
+  background: rgba(173, 216, 230, 0.35); /* açık mavimsi ve saydam */
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid rgba(173, 216, 230, 0.45);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  width: 330px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+form:hover {
+  background: rgba(173, 216, 230, 0.45); /* hoverda biraz daha belirgin */
+}
+
+/* === Etiketler === */
+label {
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* === Inputlar === */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* === Buton === */
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 1);
+  transform: scale(1.04);
+}
+
+/* === PHP mesajları === */
+p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+}
+.top-right-menu a {
+    background: rgba(255, 255, 255, 0.2); /* beyaz hafif saydam */
+    backdrop-filter: blur(5px); /* daha az blur */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+/* === Tarih input tasarımı === */
+.search-form input[type="date"] {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
+    background-color: #fff;
+    color: #000;
+}
+
+.search-form input[type="date"]:focus {
+    border-color: #00aaff;
+    box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+    outline: none;
+}
+/* ===== Navbar ve Butonlar ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 36px;                  /* daha büyük ve aşağıya doğru */
+    background: rgba(30, 144, 255, 0.85); /* navbar arka planı */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+    position: fixed;
+    top: 12px;                           /* sayfanın biraz aşağısında */
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    border-radius: 10px;                 /* alt köşeler hafif yuvarlak */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    font-size: 16px;
+    gap: 12px;
+}
+
+/* Sol blok (Anasayfa) */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 24px; /* sola biraz boşluk */
+}
+
+/* Sağ blok (Giriş/Kayıt/Çıkış ve bakiye) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 24px;
+}
+
+/* Butonların ortak görünümü: Anasayfa, Giriş, Kayıt, Çıkış */
+.nav-left a,
+.nav-right a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #000;  /* yazı rengi koyu */
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: rgba(173, 216, 230, 0.35); /* cam efekti arkaplan */
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border: 1px solid rgba(173, 216, 230, 0.45);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+/* Hover efekti tüm butonlar için */
+.nav-left a:hover,
+.nav-right a:hover {
+    background: rgba(173, 216, 230, 0.45); /* hoverda biraz koyulaşır */
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+/* Anasayfa butonunu biraz daha büyük yap */
+.nav-left a {
+    font-size: 18px;
+    padding: 14px 26px;
+}
+
+/* Kullanıcı ismi ve bakiye */
+.nav-right span {
+    color: #000; /* koyu renk yazı */
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+/* Opsiyonel: bakiye badge görünümü */
+.nav-right .balance-badge {
+    background: rgba(173, 216, 230, 0.35);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+/* Search form üst boşluk navbar yüksekliğine göre ayar */
+.search-form form {
+    max-width: 520px;
+    margin: 160px auto 20px; /* navbar yüksekliği kadar boşluk */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Responsive küçük ekranlar için */
+@media (max-width: 720px) {
+    .navbar { padding: 16px 18px; top: 8px; border-radius: 6px; }
+    .nav-left a, .nav-right a { padding: 10px 14px; font-size: 15px; }
+    .search-form form { margin-top: 120px; width: 92%; }
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* butonlar arası boşluk */
+    margin-right: 24px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #000;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: rgba(173, 216, 230, 0.35); /* cam efekti */
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border: 1px solid rgba(173, 216, 230, 0.45);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.nav-right a:hover {
+    background: rgba(173, 216, 230, 0.45);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+/* Bakiye etiketi */
+.nav-right .balance-badge {
+    background: rgba(173, 216, 230, 0.35);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(173, 216, 230, 0.35);
+    backdrop-filter: blur(14px) saturate(130%);
+    border-bottom: 1px solid rgba(173, 216, 230, 0.45);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-left a, .nav-right a {
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.nav-left a:hover, .nav-right a:hover {
+    background: rgba(173, 216, 230, 0.45);
+}
+
+/* Search form */
+.search-form form {
+    max-width: 400px;
+    margin: 100px auto 20px; /* Navbar yüksekliği için üst boşluk */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-form input,
+.search-form select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.search-form select {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+    border-color: #00aaff;
+    box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+    outline: none;
+}
+
+.search-form button {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(0, 170, 255, 0.8);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.search-form button:hover {
+    background-color: #0088cc;
+    transform: scale(1.03);
+}
+
+/* Center message */
+.center-message {
+    position: fixed;
+    top: 60px; /* Navbar altında */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    text-align: center;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 18px;
+    color: #000;
+    z-index: 900;
+}
+/* ===== Trips (Seferler) ===== */
+.trip-container {
+    max-width: 700px;       /* kutu daha dar */
+    margin: 100px auto 20px; 
+    padding: 10px;
+}
+
+.trip-card {
+    background: rgba(173, 216, 230, 0.35);
+    backdrop-filter: blur(14px) saturate(130%);
+    border-radius: 10px;
+    padding: 15px;          /* kutu içi boşluk küçüldü */
+    margin-bottom: 12px;    /* alt boşluk küçüldü */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.18s ease;
+    font-size: 14px;        /* yazı boyutu küçüldü */
+}
+
+.trip-card h3 {
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.trip-card p {
+    margin: 4px 0;
+}
+
+.trip-card .company-logo img {
+    height: 30px;           /* logo küçültüldü */
+    border-radius: 4px;
+}
+.trip-container {
+    max-width: 900px;
+    margin: 120px auto 20px; /* navbar boşluğu */
+    padding: 20px;
+}
+
+.trip-card {
+    background: rgba(173, 216, 230, 0.35);
+    backdrop-filter: blur(14px) saturate(130%);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.18s ease;
+}
+
+.trip-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+.trip-card h3 { margin-top: 0; font-size: 18px; }
+.trip-card p { margin: 6px 0; }
+
+.trip-card .company-logo img {
+    height: 40px;
+    border-radius: 6px;
+}
+/* ==== company.php özel stiller (company-page kökü) ==== */
+.company-page {
+  font-family: "Poppins", Arial, sans-serif;
+  min-height: 100vh;
+  background: url("/oto/wallpaper.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #000;
+  padding-top: 100px; /* navbar alt boşluk */
+}
+
+/* Başlık */
+.company-page .company-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: 22px;
+}
+
+/* Hata/uyarı kutusu */
+.company-page .company-page-alert {
+  max-width: 600px;
+  margin: 10px auto;
+  background: rgba(255, 220, 220, 0.9);
+  color: #900;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Form kutusu (ortadaki) */
+.company-page .trip-form-container {
+  max-width: 600px;
+  margin: 12px auto;
+  background: rgba(173,216,230,0.35);
+  padding: 18px;
+  border-radius: 12px;
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.company-page .trip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.company-page .trip-form input,
+.company-page .trip-form label,
+.company-page .trip-form button {
+  font-size: 15px;
+}
+
+.company-page .trip-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.9);
+  box-sizing: border-box;
+}
+
+.company-page .trip-form input:focus {
+  outline: none;
+  border-color: #00aaff;
+  box-shadow: 0 0 6px rgba(0,170,255,0.18);
+}
+
+/* Buton */
+.company-page .trip-form button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(0,170,255,0.9);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.company-page .trip-form button:hover {
+  background: #0088cc;
+  transform: translateY(-2px);
+}
+
+/* Sefer listesi (sağda çıkan) */
+.company-page .trip-list-container {
+  max-width: 900px;
+  margin: 18px auto 60px;
+  background: rgba(173,216,230,0.25);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  overflow-x: auto;
+}
+
+.company-page .trip-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.company-page .trip-table th,
+.company-page .trip-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+
+.company-page .trip-table thead th {
+  background: rgba(0,170,255,0.18);
+  font-weight: 700;
+}
+
+.company-page .trip-table tr:nth-child(even) td {
+  background: rgba(255,255,255,0.03);
+}
+
+.company-page .trip-table tr:hover td {
+  background: rgba(0,170,255,0.08);
+}
+
+.company-page .delete-link {
+  color: #b30000;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.company-page .delete-link:hover {
+  text-decoration: underline;
+}
+/* ==== company.php özel düzenleme: başlık ve form hizalama ==== */
+.company-page main {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 60px 20px 40px; /* üstten boşluk navbar için, yanlardan padding */
+}
+
+/* Başlık */
+.company-page .company-title {
+    margin-top: 0; /* main padding zaten üstten boşluk veriyor */
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* Form kutusu merkezde ve genişliği uygun */
+.company-page .trip-form-container {
+    margin: 0 auto 30px;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(173,216,230,0.35);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+/* ==== company.php özel ==== */
+.company-page .company-main {
+    max-width: 950px;
+    margin: 0 auto;
+    padding-top: 140px; /* navbar yüksekliği + boşluk */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
+}
+
+/* Başlık */
+.company-page .company-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* Form kutusu */
+.company-page .trip-form-container {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    background: rgba(173,216,230,0.35);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* Tablo kutusu */
+.company-page .trip-list-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(173,216,230,0.35);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.company-page table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.company-page table th,
+.company-page table td {
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+.company-page .delete-link {
+    color: red;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.company-page .delete-link:hover {
+    text-decoration: underline;
+}
+/* Form container düzenlemesi */
+.company-page .trip-form-container {
+    display: flex;
+    justify-content: center; /* yatayda ortala */
+    align-items: center;
+    max-width: 100%; /* container %100 genişlik alsın */
+    padding: 20px;
+    margin-bottom: 30px;
+    background: rgba(173,216,230,0.35);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* İçindeki formun genişliği */
+.company-page .trip-form-container .trip-form {
+    width: 100%;
+    max-width: 600px; /* artık tam ortada olacak */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* Company page select inputları index ile aynı görünmesi için */
+.company-page .trip-form select {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    font-size: 16px;
+    font-family: inherit;
+    color: #333;
+    appearance: none; /* arrow icon için */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.company-page .trip-form select:focus {
+    outline: none;
+    border-color: #5a9bd4;
+    box-shadow: 0 0 5px rgba(90, 155, 212, 0.5);
+    background-color: #fff;
+}
+.buy-ticket-link {
+    display: inline-block;
+    margin-top: 12px; /* butonu biraz aşağıya kaydır */
+    padding: 10px 16px;
+    background: rgba(173, 216, 230, 0.35); /* cam efekti arkaplan */
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border: 1px solid rgba(173, 216, 230, 0.45);
+    border-radius: 8px;
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.buy-ticket-link:hover {
+    background: rgba(173, 216, 230, 0.45);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+.coupon-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.edit-btn {
+    background: #2196F3;
+}
+
+.edit-btn:hover {
+    background: #1976D2;
+}
+
+.delete-btn {
+    background: #f44336;
+}
+
+.delete-btn:hover {
+    background: #d32f2f;
+}
+/* Buton container - DÜZELTILMIŞ */
+.ticket-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    align-items: center;
+}
+
+/* PDF İndir Butonu */
+.pdf-btn {
+    flex: 1;
+    padding: 10px 20px;
+    font-size: 14px;
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.pdf-btn:hover {
+    background: linear-gradient(135deg, #357abd 0%, #2a5a8f 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+}
+
+.pdf-btn:active {
+    transform: translateY(0);
+}
+
+/* İade Et Butonu + Form */
+.refund-form {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.refund-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 14px;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.refund-btn:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4);
+}
+
+.refund-btn:active {
+    transform: translateY(0);
+}
+
+
+
+
