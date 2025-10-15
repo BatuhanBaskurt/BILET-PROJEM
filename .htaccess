@@ -1,0 +1,30 @@
+# ======================================================================
+# APACHE GÜVENLİK AYARLARI
+# ======================================================================
+
+# 1. EN KRİTİK KURAL: Veritabanı dosyasına erişimi engelle
+# Birisi tarayıcıdan "siteadi.com/database.db" yazarsa 403 Forbidden hatası alır.
+<Files "*.db">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# 2. KRİTİK KURAL: Dizin listelemeyi kapat
+# Eğer bir klasörde index.php yoksa, sunucu o klasördeki tüm dosyaları listelemez.
+# Bu, saldırganın sitenin haritasını çıkarmasını engeller.
+Options -Indexes
+
+# 3. ÖNEMLİ KURAL: Hassas dosyalara erişimi engelle
+# .htaccess dosyasının kendisi, log dosyaları, config dosyaları gibi
+# önemli dosyaların web'den okunmasını engeller.
+<FilesMatch "\.(htaccess|htpasswd|ini|log|conf|sh|bak)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# 4. PHP Hata Raporlamasını Kapat (Sadece Canlı Sunucuda)
+# Bu ayar, PHP hatalarının detaylarını (dosya yolları gibi) ekranda göstermez.
+# Bu, saldırgana ipucu vermeni engeller. Localhost'ta çalışırken başına # koyarak kapatabilirsin.
+php_flag display_errors Off
+php_flag log_errors On
+php_value error_log /var/www/html/logs/php_errors.log # Log dosyasının yolu (sunucuna göre ayarla)

@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  # "web" adında bir servis (konteyner) oluşturuyoruz.
+  web:
+    # Bu servisin imajını, bulunduğumuz klasördeki Dockerfile'dan inşa et.
+    build: .
+    # Dışarıdaki 8000 portunu, içerideki 80 portuna bağla.
+    # Yani tarayıcıya localhost:8000 yazdığında, Apache'ye ulaşacak.
+    ports:
+      - "8000:80"
+    # Proje dosyalarını senkronize et.
+    # Bu sayede kendi bilgisayarında bir dosyayı değiştirdiğinde, anında konteynerin içine de yansır.
+    volumes:
+      - .:/var/www/html
