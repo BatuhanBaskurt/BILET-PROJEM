@@ -76,7 +76,9 @@ Projeyi test etmek için aşağıdaki hazır kullanıcıları kullanabilirsiniz.
 
 - **Şirket Admini:**
   - **E-posta:** `comp@comp.com`
-  - **Şifre:** `comp` - **Normal Kullanıcı:**
+  - **Şifre:** `comp` 
+
+- **Normal Kullanıcı:**
   - Yeni bir kullanıcı olarak kayıt olabilirsiniz. Varsayılan bakiye ₺800 olarak atanır.
 
 ---
