@@ -38,5 +38,4 @@ try {
     die("Hata");
 }
 
-// NOT: Sadece PHP kodu içeren dosyalarda kapanış etiketi (?>) kullanmıyoruz. 
-// Bu, dosya sonunda yanlışlıkla boşluk bırakılmasını ve başlık hatalarını önler.
+
