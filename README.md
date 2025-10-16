@@ -11,7 +11,7 @@ Bu proje, PHP ve SQLite kullanılarak geliştirilmiş, Docker ile paketlenmiş b
   - Koltuk seçerek bilet satın alma
   - Kupon kullanarak indirimli bilet alma
   - Satın alınan biletleri görüntüleme ve PDF olarak indirme
-  - Bilet iade etme (fonksiyonu eklenebilir)
+  - Bilet iade etme
   - Profil bilgilerini ve geçmiş biletleri görüntüleme
 
 - **Şirket Admin Paneli (`comp_admin`):**
@@ -21,7 +21,7 @@ Bu proje, PHP ve SQLite kullanılarak geliştirilmiş, Docker ile paketlenmiş b
 
 - **Ana Admin Paneli (`admin`):**
   - Tüm otobüs şirketlerini yönetme (oluşturma, düzenleme, silme)
-  - Tüm kullanıcıları ve rollerini yönetme (eklenebilir)
+  - Tüm kullanıcıları ve rollerini yönetme 
 
 ---
 
