@@ -2,10 +2,8 @@
 // Hata raporlamayı açalım ki sorun olursa görelim
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-session_start();
 include 'db.php'; // PDO ile SQLite bağlantısı
-
+session_start();
 // Sadece comp_admin girebilir
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'comp_admin') {
     header("Location: index.php");

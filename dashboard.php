@@ -1,6 +1,7 @@
 <?php
-session_start();
+
 include 'db.php';
+session_start();
 
 // Sadece admin girebilir
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {

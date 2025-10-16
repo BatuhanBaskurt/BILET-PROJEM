@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'db.php';
+session_start();
 
 if (!isset($_SESSION['user_id']) || !isset($_POST['ticket_id'])) {
     header("Location: ticket.php");

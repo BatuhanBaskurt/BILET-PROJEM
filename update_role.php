@@ -1,8 +1,8 @@
 <?php
 header('Content-Type: application/json');
-session_start();
-include 'db.php';
 
+include 'db.php';
+session_start();
 $response = ['success' => false, 'message' => ''];
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {

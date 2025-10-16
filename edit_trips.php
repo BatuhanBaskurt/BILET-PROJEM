@@ -1,7 +1,9 @@
 <?php
 // edit_trips.php - API gibi çalışsın ama form görsel, GET ile id al, POST ile update
-session_start();
+
+
 include 'db.php';
+session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: admin.php");

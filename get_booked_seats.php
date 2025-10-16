@@ -1,7 +1,7 @@
 <?php
 // 1. ADIM: Session'ı başlat ve veritabanını dahil et
-session_start();
 include 'db.php';
+session_start();
 
 header('Content-Type: application/json');
 

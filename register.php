@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'db.php'; // PDO ile SQLite bağlantısı
+session_start();
 
 $message = '';
 

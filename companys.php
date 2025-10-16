@@ -1,7 +1,8 @@
 <?php
 header('Content-Type: application/json');
-session_start();
+
 include 'db.php';
+session_start();
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     echo json_encode(['error' => 'Yetkisiz erişim!']);

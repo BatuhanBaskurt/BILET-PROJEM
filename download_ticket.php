@@ -2,8 +2,8 @@
 // 1. ADIM: TCPDF Kütüphanesini Dahil Et
 require_once('tcpdf/tcpdf.php');
 
-session_start();
 include 'db.php';
+session_start();
 
 // 2. ADIM: GÜVENLİK - Kullanıcı girişi kontrolü
 if (!isset($_SESSION['user_id'])) {

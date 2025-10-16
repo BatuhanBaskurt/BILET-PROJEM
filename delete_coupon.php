@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'db.php';
+session_start();
 
 // Sadece comp_admin erişebilir
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'comp_admin') {

@@ -3,8 +3,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
 include 'db.php';
+session_start();
 
 // Sadece comp_admin erişebilir
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'comp_admin') {

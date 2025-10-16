@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'db.php';
+session_start();
 
 // Kullanıcı giriş kontrolü
 if (!isset($_SESSION['user_id'])) {

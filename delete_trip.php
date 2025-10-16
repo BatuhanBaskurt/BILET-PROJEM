@@ -1,6 +1,7 @@
 <?php
-session_start();
+
 include 'db.php';
+session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'comp_admin') {
     header("Location: index.php");

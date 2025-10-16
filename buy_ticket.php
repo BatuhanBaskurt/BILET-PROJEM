@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'db.php';
+session_start();
 header('Content-Type: application/json');
 
 // 1. GİRİŞ KONTROLÜ (Bu kısım zaten doğruydu)

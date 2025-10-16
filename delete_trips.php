@@ -1,7 +1,7 @@
 <?php
 // delete_trips.php - API gibi, GET ile sil, JSON dönsün ama redirect veya confirm var
-session_start();
 include 'db.php';
+session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     echo json_encode(['success' => false, 'message' => 'Yetkisiz']);

@@ -3,8 +3,9 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
+
 include 'db.php';
+session_start();
 
 // Bu fonksiyon, standartlara uygun bir v4 UUID üretir.
 function generate_uuid_v4() {

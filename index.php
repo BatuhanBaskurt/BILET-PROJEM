@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'db.php'; // PDO ile SQLite bağlantısı
+session_start();
 
 // Kullanıcı giriş yaptıysa, balance ve isim çek
 if(isset($_SESSION['user_id'])){
