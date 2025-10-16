@@ -13,15 +13,14 @@ RUN docker-php-ext-install pdo_sqlite curl
 # Proje dosyalarını imajın içine kopyalıyoruz.
 COPY . /var/www/html/
 
-# 🔥 DOĞRU YÖNTEM BURADA BAŞLIYOR 🔥
 # Otomatik izin script'ini konteynerin içine kopyala
 COPY docker-entrypoint.sh /usr/local/bin/
 
-# O script'i çalıştırılabilir yap (izin ver)
+# O script'i çalıştırılabilir yap
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Konteyner başladığında ilk olarak bu script'i çalıştır
+# Konteyner başladığında bu script'i çalıştır
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-# ENTRYPOINT'ten sonra çalıştırılacak varsayılan komutu belirt (Apache'yi başlat)
+# ENTRYPOINT'ten sonra çalıştırılacak varsayılan komutu belirt
 CMD ["apache2-foreground"]
