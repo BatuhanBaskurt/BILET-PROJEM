@@ -1,30 +1,29 @@
 #!/bin/sh
 set -e
 
-# Veritabanı dosyası adı
 DB_FILE="database.db"
+# PHP Apache imajı www-data kullanıcısı ile çalışır.
+WEB_USER="www-data"
+WEB_GROUP="www-data" 
 
 echo "--- Docker Entrypoint Başlatılıyor ---"
 
-# 1. database.db dosyasının mevcut olup olmadığını kontrol et
 if [ -f "$DB_FILE" ]; then
-    echo "Veritabanı dosyası ($DB_FILE) bulundu. İzinler ayarlanıyor..."
+    echo "Veritabanı dosyası ($DB_FILE) bulundu. Sahiplik ve izinler ayarlanıyor..."
     
-    # 2. En güvenilir yöntem: Dosyaya herkesin yazabilmesi için 666 izni ver.
-    # Bu, web sunucusu kullanıcısının (www-data) izin sorununu çözer.
-    chmod 666 "$DB_FILE"
+    # 🚨 ÖNEMLİ: Volume nedeniyle sahipliği www-data'ya zorla ayarla.
+    chown $WEB_USER:$WEB_GROUP "$DB_FILE"
     
-    echo "$DB_FILE dosyasına yazma izinleri (chmod 666) başarıyla ayarlandı."
+    # Yazma iznini www-data kullanıcısına ve grubuna ver (664)
+    chmod 664 "$DB_FILE"
     
-    # Not: Güvenlik için daha sonra sadece www-data kullanıcısına izin veren bir çözüm önerilebilir, 
-    # ancak bu, readonly hatasını kesin çözer.
-
+    echo "$DB_FILE dosyasına $WEB_USER kullanıcısı için izinler başarıyla ayarlandı."
 else
-    echo "UYARI: $DB_FILE dosyası bulunamadı. Uygulama başlatıldığında oluşturulacak ve izni ayarlanacaktır."
-    # Eğer dosya yoksa ve uygulama tarafından oluşturulacaksa, klasör iznini de ayarlayalım.
-    # database.db dosyasının oluşturulacağı dizine (./) de yazma izni verilir.
-    chmod 777 .
+    echo "UYARI: $DB_FILE dosyası bulunamadı. Uygulama oluşturacaksa, klasör izni veriliyor..."
+    # Eğer database.db yoksa ve uygulama oluşturacaksa, bulunduğu klasöre yazma izni verilir.
+    chown $WEB_USER:$WEB_GROUP .
+    chmod 775 .
 fi
 
-# 3. Asıl komutu çalıştır (PHP-FPM, Apache vb.)
+# Asıl komutu çalıştır (Apache'yi başlat)
 exec "$@"
