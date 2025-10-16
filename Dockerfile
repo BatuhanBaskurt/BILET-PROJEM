@@ -1,13 +1,22 @@
 # Resmi PHP-Apache imajını temel alıyoruz.
 FROM php:8.1-apache
 
-# Gerekli PHP eklentileri için bağımlılıkları kuruyoruz.
+# Gerekli sistem kütüphanelerini kuruyoruz.
 RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     libcurl4-openssl-dev \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# PHP eklentilerini aktif ediyoruz.
+# 🔥 YENİ EKLENEN KISIM BAŞLIYOR 🔥
+# GD Kütüphanesini kur (PNG/JPEG resim işlemleri için)
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+# 🔥 YENİ EKLENEN KISIM BİTİYOR 🔥
+
+# Diğer PHP eklentilerini aktif ediyoruz.
 RUN docker-php-ext-install pdo_sqlite curl
 
 # Proje dosyalarını imajın içine kopyalıyoruz.
