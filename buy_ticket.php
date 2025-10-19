@@ -3,9 +3,20 @@ include 'db.php';
 session_start();
 header('Content-Type: application/json');
 
-// 1. GİRİŞ KONTROLÜ (Bu kısım zaten doğruydu)
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? 'user') !== 'user') {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Bilet almak için giriş yapmalısınız.']);
+    exit;
+}
+
+$user_role = $_SESSION['role'] ?? 'user';
+
+// Sadece normal kullanıcılar bilet alabilir
+if ($user_role !== 'user') {
+    if ($user_role === 'comp_admin') {
+        echo json_encode(['success' => false, 'message' => 'Şirket admini bilet satın alamaz.']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Bu işlemi yapmaya yetkiniz yok.']);
+    }
     exit;
 }
 
@@ -121,3 +132,4 @@ try {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
 ?>
+
