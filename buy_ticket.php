@@ -3,9 +3,20 @@ include 'db.php';
 session_start();
 header('Content-Type: application/json');
 
-// 1. GİRİŞ KONTROLÜ (Bu kısım zaten doğruydu)
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? 'user') !== 'user') {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Bilet almak için giriş yapmalısınız.']);
+    exit;
+}
+
+$user_role = $_SESSION['role'] ?? 'user';
+
+// Sadece normal kullanıcılar bilet alabilir
+if ($user_role !== 'user') {
+    if ($user_role === 'comp_admin') {
+        echo json_encode(['success' => false, 'message' => 'Şirket admini bilet satın alamaz.']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Bu işlemi yapmaya yetkiniz yok.']);
+    }
     exit;
 }
 
@@ -19,10 +30,10 @@ if (!$trip_id || empty($selected_seats)) {
     exit;
 }
 
-// 2. TRANSACTION BAŞLATMA (Bu kısım zaten mükemmeldi)
+
 $pdo->beginTransaction();
 try {
-    // 3. SEFER VE FİYAT BİLGİLERİNİ ÇEKME (Bu kısım zaten doğruydu)
+    // 3. SEFER VE FİYAT BİLGİLERİNİ ÇEKME 
     $stmt = $pdo->prepare("SELECT * FROM Trips WHERE id = ?");
     $stmt->execute([$trip_id]);
     $trip = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -75,14 +86,7 @@ try {
     if (!empty($already_booked)) {
         throw new Exception("Hata: " . implode(', ', $already_booked) . " numaralı koltuk(lar) siz işlem yaparken satıldı.");
     }
-    
-    // ======================================================================
-    //                        DEĞİŞEN KISIM BAŞLIYOR
-    // ======================================================================
 
-    // 7. HER KOLTUK İÇİN AYRI BİLET OLUŞTURMA (YENİ MANTIK)
-    
-    // Her bir bilete düşen nihai fiyatı hesaplayalım.
     $final_price_per_seat = $final_price / count($selected_seats);
 
     $stmt_ticket = $pdo->prepare("INSERT INTO Tickets (trip_id, user_id, seat_number, total_price, status) VALUES (?, ?, ?, ?, 'active')");
@@ -106,17 +110,12 @@ try {
         $stmt->execute([$coupon_code]);
         unset($_SESSION['discount_applied'][$trip_company_id]);
     }
-    
-    // ======================================================================
-    //                         DEĞİŞEN KISIM BİTTİ
-    // ======================================================================
 
-    // 9. İŞLEMİ ONAYLAMA (Bu kısım zaten doğruydu)
     $pdo->commit();
     echo json_encode(['success' => true, 'message' => 'Biletler başarıyla alındı!', 'seat_numbers' => implode(', ', $selected_seats), 'final_price' => number_format($final_price, 2)]);
 
 } catch (Exception $e) {
-    // 10. HATA YÖNETİMİ (Bu kısım zaten mükemmeldi)
+
     if ($pdo->inTransaction()) $pdo->rollBack();
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
