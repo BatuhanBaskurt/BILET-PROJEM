@@ -70,7 +70,7 @@ Bu proje, Docker sayesinde herhangi bir ek kurulum gerektirmeden tek komutla ça
 
 Projeyi test etmek için aşağıdaki hazır kullanıcıları kullanabilirsiniz. Veritabanı (`database.db`) proje ile birlikte geldiği için bu kullanıcılar varsayılan olarak mevcuttur.
 
-- **Ana Admin:**
+- **Ana Admin:** `(admin.php)`
   - **E-posta:** `admin@admin.com`
   - **Şifre:** `admin`
 

@@ -24,7 +24,7 @@ if ($ticket['status'] === 'cancelled') {
     die("Bu bilet zaten iptal edilmiş!");
 }
 
-// İade işlemi - Status'u cancelled yap, silme!
+// İade işlemi 
 $stmt = $pdo->prepare("UPDATE Tickets SET status = 'cancelled' WHERE id = ?");
 $stmt->execute([$ticket_id]);
 

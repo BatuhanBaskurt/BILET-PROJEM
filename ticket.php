@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 session_start();
-// Kullanıcı giriş kontrolü
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -17,7 +17,7 @@ $_SESSION['balance'] = $user['balance'];
 $_SESSION['full_name'] = $user['full_name'];
 $_SESSION['role'] = $user['role'] ?? 'user';
 
-// Kullanıcının biletlerini çek - SADECE AKTİF BİLETLER (status = 'active')
+// Kullanıcının biletlerini çek 
 $stmt = $pdo->prepare("
     SELECT 
         t.id AS ticket_id, 
@@ -47,12 +47,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <title>Biletlerim</title>
 <link rel="stylesheet" href="style.css">
 <style>
-:root {
-    --primary-color: #007bff;
-    --danger-color: #dc3545;
-    --light-blue: rgba(173, 216, 230, 0.35);
-    --light-blue-border: rgba(173, 216, 230, 0.45);
-}
+
 
 body {
     background-color: #f4f7f6;
@@ -60,144 +55,6 @@ body {
     height: auto !important;
     min-height: 100vh;
 }
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: var(--light-blue);
-    backdrop-filter: blur(14px) saturate(130%);
-    border-bottom: 1px solid var(--light-blue-border);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.nav-left a, .nav-right a {
-    margin-right: 15px;
-    text-decoration: none;
-    font-weight: 600;
-    color: #000;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: background-color 0.25s ease;
-}
-
-.nav-left a:hover, .nav-right a:hover {
-    background-color: var(--light-blue-border);
-}
-
-.nav-right .balance-badge {
-    background: var(--light-blue);
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-weight: 700;
-    margin-right: 6px;
-}
-
-.ticket-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 100px 20px 40px 20px;
-}
-
-.container-title {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.ticket-card {
-    background: rgba(173, 216, 230, 0.35);
-    backdrop-filter: blur(14px) saturate(130%);
-    border: 1px solid rgba(173, 216, 230, 0.45);
-    border-radius: 12px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.ticket-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: transparent;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.ticket-route {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #000;
-}
-
-.company-name {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #000;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 5px 10px;
-    border-radius: 6px;
-}
-
-.ticket-body {
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.ticket-body p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: #000;
-}
-
-.ticket-body p strong {
-    color: #000;
-    font-weight: 700;
-}
-
-.ticket-footer {
-    display: flex;
-    gap: 10px;
-    padding: 15px 20px;
-    background-color: transparent;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    margin-top: auto;
-    align-items: center;
-    justify-content: center; /* Butonları yatayda tam ortalar */
-}
-
-/* 🔥 SORUNU KÖKÜNDEN ÇÖZEN TEK SATIR BURADA 🔥 */
-.refund-form {
-    display: contents; /* Form etiketini layout'tan kaldırır, içindeki butonu serbest bırakır */
-}
-
-.btn {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    color: white;
-    text-align: center;
-    width: 160px; /* Butonlara sabit bir genişlik veriyoruz */
-    box-sizing: border-box; /* Padding ve border'ın genişliği etkilememesini sağlar */
-}
-.btn-primary { background-color: var(--primary-color); }
-.btn-primary:hover { background-color: #0056b3; }
-.btn-danger { background-color: var(--danger-color); }
-.btn-danger:hover { background-color: #c82333; }
 </style>
 </head>
 <body>

@@ -81,132 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['discount_code']) && i
 <title>Sefer Sonuçları</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.trip-container { max-width: 900px; margin: 120px auto 20px; padding: 0 15px; }
-.trip-card { background: rgba(173, 216, 230, 0.35); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
-h1, h3, p { color: #333; }
-.trip-card h3 { margin-top: 0; font-size: 18px; }
-.trip-card p { margin: 6px 0; }
-.buy-ticket-link { padding: 10px 16px; background: #00aaff; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; cursor: pointer; display: inline-block; }
-.price-old { text-decoration: line-through; color: #666; margin-right: 8px; }
-.price-new { font-weight: 800; color: #0b6; }
-
-/* 🔥 KUPON ALANI DÜZELTİLDİ 🔥 */
-.trip-actions { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start; 
-    margin-top: 15px; 
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.company-logo {
-    flex-shrink: 0;
-}
-
-.company-logo img { 
-    height: 50px; 
-    border-radius: 8px; 
-    object-fit: contain; 
-    display: block;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.coupon-area { 
-    flex: 1;
-    display: flex;
-    align-items: center;
-    min-width: 250px;
-}
-
-.coupon-box {
-    width: 100%;
-}
-
-.coupon-box form {
-    display: flex;
-    gap: 8px;
-    align-items: stretch;
-}
-
-.coupon-box input { 
-    padding: 10px 14px; 
-    border: 2px solid #ddd; 
-    border-radius: 8px;
-    flex: 1;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.coupon-box input:focus {
-    outline: none;
-    border-color: #00aaff;
-   
-}
-
-.coupon-box button { 
-    padding: 10px 20px; 
-    border: none; 
-    border-radius: 8px; 
-    background: #00aaff; 
-    color: white; 
-    cursor: pointer;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-.coupon-box button:hover {
-    background: #0088cc;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 170, 255, 0.3);
-}
-
-.coupon-message { 
-    display: block; 
-    margin-top: 8px; 
-    font-size: 13px; 
-    font-weight: 600;
-    padding: 6px 10px;
-    border-radius: 6px;
-    background: #f8f9fa;
-}
-
-.coupon-message.success { 
-    color: #28a745; 
-    background: #d4edda;
-    border-left: 4px solid #28a745;
-}
-
-.coupon-message.error { 
-    color: #dc3545;
-    background: #f8d7da;
-    border-left: 4px solid #dc3545;
-}
-
-.purchase-area { 
-    flex-shrink: 0;
-    display: flex; 
-    flex-direction: column; 
-    align-items: flex-end;
-}
-
-/* Koltuk Seçme Modalı */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1001; }
-.modal { background: #fff; padding: 25px; border-radius: 10px; width: 90%; max-width: 900px; height: 450px; max-height: 90vh; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; flex-direction: column; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; flex-shrink: 0; }
-.modal-header h2 { margin: 0; color: #333; }
-.close-btn { font-size: 24px; cursor: pointer; border: none; background: none; }
-.modal-body { flex-grow: 1; overflow: auto; }
-.seat-map { display: flex; flex-flow: column wrap; height: 200px; gap: 10px; padding: 10px; background-color: #f0f3f7; border-radius: 8px; overflow-x: auto; }
-.seat { width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; background: #fff; border: 1px solid #b0c4de; color: #333; }
-.seat.corridor { background: none; border: none; cursor: default; }
-.seat.booked { background: #849db8; color: #fff; cursor: not-allowed; }
-.seat.selected { background: #28a745; color: #fff; border-color: #28a745; }
-.modal-footer { margin-top: 15px; text-align: right; flex-shrink: 0; }
-.confirm-purchase-btn { padding: 12px 24px; background: #28a745; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-#selected-info { font-weight: bold; color: #333; }
+    body{
+        padding-top: 220px;
+    }
 </style>
 </head>
 <body>
@@ -423,4 +300,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html>
+</html>
+

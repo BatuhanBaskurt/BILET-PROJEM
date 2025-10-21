@@ -46,7 +46,7 @@ try {
     $total_original_price = $original_price_per_seat * count($selected_seats);
     $trip_company_id = $trip['company_id'] ?? null;
 
-    // 4. KUPON MANTIĞI (Bu kısım çok iyiydi, aynen korundu)
+    // 4. KUPON MANTIĞI 
     $discount_amount = 0.0;
     $coupon_code = null;
     $applies_coupon = false;
@@ -66,7 +66,7 @@ try {
     $final_price = $total_original_price - $discount_amount;
     if ($final_price < 0) $final_price = 0;
 
-    // 5. BAKİYE KONTROLÜ (Bu kısım zaten doğruydu)
+    // 5. BAKİYE KONTROLÜ 
     $stmt = $pdo->prepare("SELECT balance FROM User WHERE id = ?");
     $stmt->execute([$user_id]);
     $user_balance = $stmt->fetchColumn();
@@ -75,9 +75,9 @@ try {
         throw new Exception("Yetersiz bakiye!");
     }
 
-    // 6. DOLU KOLTUK KONTROLÜ (Bu kısım daha basit hale getirildi ve düzeltildi)
+    // 6. DOLU KOLTUK KONTROLÜ 
     $placeholders = implode(',', array_fill(0, count($selected_seats), '?'));
-    // Not: Artık Booked_Seats yerine direkt Tickets tablosunu kontrol edebiliriz.
+ 
     $stmt_check = $pdo->prepare("SELECT seat_number FROM Tickets WHERE trip_id = ? AND seat_number IN ($placeholders) AND status = 'active'");
     $params = array_merge([$trip_id], $selected_seats);
     $stmt_check->execute($params);
@@ -92,14 +92,12 @@ try {
     $stmt_ticket = $pdo->prepare("INSERT INTO Tickets (trip_id, user_id, seat_number, total_price, status) VALUES (?, ?, ?, ?, 'active')");
     
     foreach ($selected_seats as $seat) {
-        // Her bir koltuk için 'Tickets' tablosuna KENDİ NUMARASI ve KENDİ FİYATI ile yeni bir kayıt oluşturuyoruz.
         $stmt_ticket->execute([$trip_id, $user_id, $seat, $final_price_per_seat]);
     }
     
-    // Not: Booked_Seats tablosuna artık gerek kalmadı, çünkü her bilgi Tickets tablosunda mevcut.
-    // Eğer o tabloyu hala kullanmak istersen, yukarıdaki döngünün içine ekleyebilirsin.
+ 
 
-    // 8. BAKİYE DÜŞME VE KUPON GÜNCELLEME (Bu kısımlar doğruydu, döngü dışında kalmalı)
+    // 8. BAKİYE DÜŞME VE KUPON GÜNCELLEME 
     $new_balance = $user_balance - $final_price;
     $stmt = $pdo->prepare("UPDATE User SET balance = ? WHERE id = ?");
     $stmt->execute([$new_balance, $user_id]);

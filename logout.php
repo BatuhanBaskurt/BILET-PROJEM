@@ -1,8 +1,8 @@
 <?php
-session_start(); // session başlat
-session_unset(); // tüm session değişkenlerini temizle
-session_destroy(); // session'ı yok et
+session_start(); 
+session_unset(); 
+session_destroy(); 
 
-header("Location: index.php"); // ana sayfaya yönlendir
+header("Location: index.php"); 
 exit;
 ?>

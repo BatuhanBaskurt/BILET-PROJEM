@@ -778,7 +778,1411 @@ p {
 .refund-btn:active {
     transform: translateY(0);
 }
+.navbar-admin {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #dc3545;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* Önemli */
+    height: 60px; /* Sabit bir yükseklik verelim */
+    align-items: center; /* Dikeyde ortalamak için */
+    border-radius: 0;
+}
+
+.nav-left a, .nav-right a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-family: "Poppins", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* 🔥 BÜTÜN SORUNU ÇÖZEN KOD BURADA (1/2) 🔥 */
+/* Body'e, navbar'ın yüksekliği kadar üstten boşluk veriyoruz */
+body {
+    padding-top: 60px; /* Navbar'ın yüksekliği kadar */
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: #f4f7f6; /* Saydamlık yerine düz renk daha iyi olabilir */
+}
 
 
+/* Dashboard Ana Alanı */
+/* 🔥 GEREKSİZ BOŞLUĞU AZALTTIK (2/2) 🔥 */
+.dashboard {
+    max-width: 1200px;
+    margin: 30px auto; /* Üstteki 100px'i azalttık */
+    padding: 20px;
+    background-color: #ffffff; /* Saydamlık yerine beyaz */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard h1 {
+    text-align: center;
+    color: #dc3545;
+    margin-bottom: 10px; /* Boşluğu azalttım */
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.dashboard h2 {
+    text-align: center;
+    color: #555; /* Rengi biraz yumuşattım */
+    margin-bottom: 40px;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+/* Dashboard Kartları */
+.dashboard-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.dashboard-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-card h3 {
+    color: #dc3545;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.dashboard-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.action-btn:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+.navbar-admin {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #dc3545;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 0;
+}
+.nav-left a, .nav-right a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-family: "Poppins", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+.user-container {
+    max-width: 1200px;
+    margin: 100px auto 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Poppins", Arial, sans-serif;
+}
+.user-container h1 {
+    text-align: center;
+    color: #dc3545;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+.user-schema, .user-item {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1.5fr 1.5fr 1fr; 
+    gap: 15px;
+    align-items: center;
+}
+.user-schema {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+}
+.user-list {
+    list-style: none;
+    padding: 0;
+}
+.user-item {
+    padding: 15px;
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+}
+.user-item span {
+    color: #333;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-item .role-select, .user-item .company-select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+.user-item .company-cell.hidden {
+    visibility: hidden;
+}
+.user-item .actions-cell {
+    grid-column: 6;
+}
+.save-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    font-weight: 600;
+    margin-top: 20px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.delete-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #dc3545;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+}
+.navbar-admin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #dc3545;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 60px;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+.nav-left a, .nav-right a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-family: "Poppins", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+.nav-right a:hover, .nav-left a:hover {
+    color: #f0f0f0;
+}
+/* Container */
+.user-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.user-container h1 {
+    text-align: center;
+    color: #dc3545;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-top: 0;
+}
+.company-schema {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 10px;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+}
+.company-list {
+    margin-bottom: 20px;
+}
+.company-item {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 15px;
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    border-bottom: 2px solid #ddd;
+}
+.company-item:last-child {
+    border-bottom: none;
+}
+.company-item span,
+.company-item input[type="text"],
+.company-item input[type="file"] {
+    color: #333;
+    font-size: 16px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+.company-item input[type="file"] {
+    margin-top: 5px;
+}
+.company-item .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+.company-item .update-btn,
+.company-item .delete-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+.company-item .update-btn {
+    background-color: #000000;
+    color: white;
+}
+.company-item .update-btn:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+}
+.company-item .delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+.company-item .delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+.company-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.company-form h2 {
+    text-align: center;
+    color: #dc3545;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: 700;
+    font-family: "Poppins", Arial, sans-serif;
+    margin-top: 0;
+}
+.company-form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.company-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+}
+.company-form input[type="text"],
+.company-form input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+.company-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #000000;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    align-self: center;
+}
+.company-form button:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .user-container {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+    
+    .company-schema, .company-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .company-item .button-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .company-form {
+        max-width: 100%;
+    }
+}
+.user-container {
+    max-width: 1400px;
+    margin: 100px auto 40px; /* Navbar için üst boşluk */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.user-container h1, .user-container h2 {
+    text-align: center;
+    color: #dc3545;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+/* Sefer şeması ve listesi */
+.trip-schema {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 1.5fr 2fr 2fr 1.5fr;
+    gap: 10px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+    align-items: center;
+}
+
+.trip-list {
+    list-style: none;
+    padding: 0;
+}
+
+.trip-item {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 1.5fr 2fr 2fr 1.5fr;
+    gap: 10px;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+.trip-input {
+    color: #333;
+    font-size: 14px; /* Biraz daha küçük font */
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+.trip-input:focus {
+    border-color: #dc3545;
+    outline: none;
+}
+
+.trip-item .action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #000000ff; /* Yeşil renk */
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.action-btn.delete {
+    background-color: #dc3545; /* Kırmızı renk */
+}
+
+.action-btn:hover {
+    background-color: #218838;
+}
+
+.action-btn.delete:hover {
+    background-color: #c82333;
+}
+
+/* ===== SEFER OLUŞTUR BÖLÜMÜ (DÜZELTİLDİ) ===== */
+.trip-create {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 60px; /* Üstteki listeden ayrı dursun */
+    border: 1px solid #eee;
+}
+
+.trip-create form {
+    display: grid;
+    /* 7 eleman için 7 sütun */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    align-items: center;
+}
+
+.create-input {
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create-input::placeholder {
+    color: #999;
+}
+
+.trip-create button {
+    /* Formda 7 input varsa, 7 sütunu da kaplasın. Responsive için 1/-1 daha garanti */
+    grid-column: 1 / -1; 
+    padding: 12px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.trip-create button:hover {
+    background-color: #333;
+}
+
+/* Responsive Düzenlemeler */
+@media (max-width: 1200px) {
+    .trip-schema, .trip-item {
+        grid-template-columns: repeat(5, 1fr); /* Daha az sütun */
+    }
+    .trip-item .action-buttons {
+        grid-column: 1 / -1; /* Butonlar alta insin */
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-container {
+        margin: 80px 10px 20px;
+        padding: 15px;
+    }
+    
+    .trip-schema {
+        display: none; /* Mobilde şemayı gizle, yer kaplamasın */
+    }
+    
+    .trip-item, .trip-create form {
+        grid-template-columns: 1fr; /* Her şey alt alta */
+        text-align: center;
+    }
+    
+    /* Mobilde inputların önüne ne olduklarını yazalım (pseudo-element ile) */
+    .trip-item span:before, .trip-item input:before, .trip-item select:before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #dc3545;
+    }
+
+    .trip-item .action-buttons {
+        gap: 15px;
+        margin-top: 10px;
+    }
+}
+.navbar-admin {
+    position: fixed;
+    top: 0;
+    left: 0; /* Sol boşluğu sıfırla */
+    right: 0; /* Sağ boşluğu sıfırla */
+    width: 100%;
+    background-color: #dc3545;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Dikeyde ortala */
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* Padding'i genişliğe dahil et */
+    border-radius: 0;
+}
+
+.nav-left a, .nav-right a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-family: "Poppins", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-right a:hover, .nav-left a:hover {
+    color: #f0f0f0;
+}
+    .navbar-admin {
+        position: fixed;
+        top: 0;
+        left: 0; /* Önemli */
+        right: 0; /* Önemli */
+        width: 100%;
+        background-color: #dc3545;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        height: 60px; /* Sabit yükseklik */
+        box-sizing: border-box;
+        border-radius: 0;
+    }
+    .nav-left a, .nav-right a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    /* Ana Konteyner */
+    .user-container {
+        max-width: 1200px;
+        margin: 30px auto; /* Üstteki gereksiz boşluk kaldırıldı */
+        padding: 25px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    .user-container h1, .user-container h2 {
+        text-align: center;
+        color: #dc3545;
+        margin-bottom: 30px;
+    }
+    /* Kupon Listesi */
+    .coupon-schema, .coupon-item {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr 1.5fr 1.5fr;
+        gap: 15px;
+        align-items: center;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    .coupon-schema {
+        background-color: #f8f9fa;
+        font-weight: 600;
+    }
+    .coupon-item {
+        background: #fff;
+        border: 1px solid #eee;
+    }
+    .coupon-list { list-style: none; padding: 0; }
+    .coupon-item input, .coupon-item select {
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .action-buttons { 
+        display: flex;
+        gap: 10px;
+    }
+    .action-btn {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 6px;
+        background-color: #000;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        flex: 1; /* Butonların eşit genişlemesi için */
+    }
+    .action-btn.delete {
+        background-color: #dc3545;
+    }
+    /* Yeni Kupon Oluşturma Formu */
+    .coupon-create {
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 1px solid #eee;
+    }
+    .coupon-create form {
+        max-width: 800px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    .coupon-create input, .coupon-create select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+    .coupon-create button {
+        grid-column: 1 / -1; /* Buton tam genişlik kaplasın */
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background-color: #000;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .coupon-form-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .coupon-form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background: #45a049;
+        }
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .alert-success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #2e7d32;
+            border: 1px solid #4CAF50;
+        }
+        .alert-error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        .coupons-list {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .coupons-list h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .coupon-item {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .coupon-info strong {
+            color: #4CAF50;
+            font-size: 18px;
+        }
+        .coupon-details {
+            font-size: 14px;
+            color: #666;
+        }
+        .coupon-actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: white;
+        }
+        .edit-btn {
+            background-color: #2196F3;
+        }
+        .delete-btn {
+            background-color: #f44336;
+        }
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+        .edit-btn:hover {
+            background-color: #1976D2;
+        }
+        .form-group {
+        margin-bottom: 25px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #555;
+    }
+    .form-group input[type="text"], .form-group input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid rgba(0,0,0,0.1);
+        background: rgba(255,255,255,0.7); /* Hafif beyaz inputlar */
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+        color: #333;
+    }
+    .current-logo {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+        display: flex;
+        align-items: center;
+    }
+    .current-logo img {
+        max-height: 40px;
+        border-radius: 6px;
+        margin-right: 10px;
+        background: rgba(255,255,255,0.5);
+        padding: 2px;
+    }
+    .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .alert {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 500;
+    }
+    .alert-success { background: #e8f5e9; color: #2e7d32; }
+    .alert-error { background: #ffebee; color: #c62828; }
+    body.company-page {
+        background-image: url('foto/wallpaper.jpg'); /* Resmin yolu bu olmalı */
+        background-size: cover; /* Resmi ekrana sığdırır */
+        background-position: center; /* Resmi ortalar */
+        background-repeat: no-repeat; /* Resmin tekrarlanmasını engeller */
+        background-attachment: fixed; /* Kaydırma yapınca resim sabit kalır */
+    }
+    .coupon-form-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .coupon-form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background: #45a049;
+        }
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .alert-success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #2e7d32;
+            border: 1px solid #4CAF50;
+        }
+        .alert-error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            background: #2196F3;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .back-btn:hover {
+            background: #1976D2;
+        }
+        .profile-container {
+    max-width: 600px;
+    margin: 120px auto 20px;
+    padding: 20px;
+    background: rgba(173, 216, 230, 0.35);
+    backdrop-filter: blur(14px) saturate(130%);
+    border-radius: 12px;
+}
+.profile-container h2 {
+    text-align: center;
+}
+.profile-info {
+    margin-bottom: 20px;
+}
+.profile-info p {
+    margin: 6px 0;
+    font-weight: 600;
+}
+.tickets-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tickets-table th, .tickets-table td {
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 8px 10px;
+    text-align: left;
+}
+.tickets-table th {
+    background: rgba(173,216,230,0.45);
+}
+/* Status badge'leri */
+.status-active {
+    background: rgba(76, 175, 80, 0.3);
+    color: #2e7d32;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status-cancelled {
+    background: rgba(244, 67, 54, 0.3);
+    color: #c62828;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status-expired {
+    background: rgba(158, 158, 158, 0.3);
+    color: #424242;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--light-blue);
+    backdrop-filter: blur(14px) saturate(130%);
+    border-bottom: 1px solid var(--light-blue-border);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-left a, .nav-right a {
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.25s ease;
+}
+
+.nav-left a:hover, .nav-right a:hover {
+    background-color: var(--light-blue-border);
+}
+
+.nav-right .balance-badge {
+    background: var(--light-blue);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.ticket-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 20px 40px 20px;
+}
+
+.container-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.ticket-card {
+    background: rgba(173, 216, 230, 0.35);
+    backdrop-filter: blur(14px) saturate(130%);
+    border: 1px solid rgba(173, 216, 230, 0.45);
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.ticket-route {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.company-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.ticket-body {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.ticket-body p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #000;
+}
+
+.ticket-body p strong {
+    color: #000;
+    font-weight: 700;
+}
+
+.ticket-footer {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
+    background-color: transparent;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    margin-top: auto;
+    align-items: center;
+    justify-content: center; /* Butonları yatayda tam ortalar */
+}
+
+/* 🔥 SORUNU KÖKÜNDEN ÇÖZEN TEK SATIR BURADA 🔥 */
+.refund-form {
+    display: contents; /* Form etiketini layout'tan kaldırır, içindeki butonu serbest bırakır */
+}
+
+.btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: white;
+    text-align: center;
+    width: 160px; /* Butonlara sabit bir genişlik veriyoruz */
+    box-sizing: border-box; /* Padding ve border'ın genişliği etkilememesini sağlar */
+}
+.btn-primary { background-color: var(--primary-color); }
+.btn-primary:hover { background-color: #0056b3; }
+.btn-danger { background-color: var(--danger-color); }
+.btn-danger:hover { background-color: #c82333; }
+.trip-container { max-width: 900px; margin: 120px auto 20px; padding: 0 15px; }
+.trip-card { background: rgba(173, 216, 230, 0.35); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+h1, h3, p { color: #333; }
+.trip-card h3 { margin-top: 0; font-size: 18px; }
+.trip-card p { margin: 6px 0; }
+.buy-ticket-link { padding: 10px 16px; background: #00aaff; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; cursor: pointer; display: inline-block; }
+.price-old { text-decoration: line-through; color: #666; margin-right: 8px; }
+.price-new { font-weight: 800; color: #0b6; }
+
+/* 🔥 KUPON ALANI DÜZELTİLDİ 🔥 */
+.trip-actions { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-top: 15px; 
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.company-logo {
+    flex-shrink: 0;
+}
+
+.company-logo img { 
+    height: 50px; 
+    border-radius: 8px; 
+    object-fit: contain; 
+    display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.coupon-area { 
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 250px;
+}
+
+.coupon-box {
+    width: 100%;
+}
+
+.coupon-box form {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.coupon-box input { 
+    padding: 10px 14px; 
+    border: 2px solid #ddd; 
+    border-radius: 8px;
+    flex: 1;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.coupon-box input:focus {
+    outline: none;
+    border-color: #00aaff;
+   
+}
+
+.coupon-box button { 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 8px; 
+    background: #00aaff; 
+    color: white; 
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.coupon-box button:hover {
+    background: #0088cc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 170, 255, 0.3);
+}
+
+.coupon-message { 
+    display: block; 
+    margin-top: 8px; 
+    font-size: 13px; 
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: #f8f9fa;
+}
+
+.coupon-message.success { 
+    color: #28a745; 
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+}
+
+.coupon-message.error { 
+    color: #dc3545;
+    background: #f8d7da;
+    border-left: 4px solid #dc3545;
+}
+
+.purchase-area { 
+    flex-shrink: 0;
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-end;
+}
+
+/* Koltuk Seçme Modalı */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1001; }
+.modal { background: #fff; padding: 25px; border-radius: 10px; width: 90%; max-width: 900px; height: 450px; max-height: 90vh; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; flex-direction: column; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; flex-shrink: 0; }
+.modal-header h2 { margin: 0; color: #333; }
+.close-btn { font-size: 24px; cursor: pointer; border: none; background: none; }
+.modal-body { flex-grow: 1; overflow: auto; }
+.seat-map { display: flex; flex-flow: column wrap; height: 200px; gap: 10px; padding: 10px; background-color: #f0f3f7; border-radius: 8px; overflow-x: auto; }
+.seat { width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; background: #fff; border: 1px solid #b0c4de; color: #333; }
+.seat.corridor { background: none; border: none; cursor: default; }
+.seat.booked { background: #849db8; color: #fff; cursor: not-allowed; }
+.seat.selected { background: #28a745; color: #fff; border-color: #28a745; }
+.modal-footer { margin-top: 15px; text-align: right; flex-shrink: 0; }
+.confirm-purchase-btn { padding: 12px 24px; background: #28a745; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+#selected-info { font-weight: bold; color: #333; }
+body.company-page {
+        padding-top: 70px;
+        background-image: url('foto/wallpaper.jpg'); /* ← burası eklendi */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        padding-top: 200px;
+    }
+    .company-title {
+        color: #000000ff;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    /* Konteynerlerin arkasındaki kutuları kaldırıyoruz */
+    .trip-form-container { margin-bottom: 40px; }
+    .trip-list-container { overflow-x: auto; }
+
+    /* 🔥 FOTOĞRAFTAKİ GİBİ DÜZENLİ FORM BURADA 🔥 */
+    .trip-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 sütunlu yapı */
+        gap: 20px;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .trip-form label {
+        color: #ccc;
+        font-weight: 500;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+    .trip-form input, .trip-form select {
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 1);
+        color: #000000ff;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+    .trip-form option { background: #ffffffff; }
+    /* Butonun tam genişlikte olmasını sağlıyoruz */
+    .trip-form .form-group-full {
+        grid-column: 1 / -1;
+    }
+    .trip-form button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        background: var(--update-color);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* Tablo stilleri aynı kalıyor */
+    .trip-table { width: 100%; border-collapse: collapse; color: #fff; }
+    .trip-table th, .trip-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+    .trip-table thead th { background: rgba(255, 255, 255, 0.15); }
+    .trip-table input, .trip-table select { width: 100%; padding: 8px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; border-radius: 4px; box-sizing: border-box; }
+    .actions-cell { display: flex; gap: 8px; }
+    .btn { padding: 6px 12px; border-radius: 4px; border: none; color: white; text-decoration: none; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-update { background-color: var(--update-color); }
+    .btn-delete { background-color: var(--primary-color); }
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox için */
+    input[type=number] {
+        -moz-appearance: textfield;
+        
+        
+    }
+    :root {
+    --primary-color: #007bff;
+    --danger-color: #dc3545;
+    --light-blue: rgba(173, 216, 230, 0.35);
+    --light-blue-border: rgba(173, 216, 230, 0.45);
+}
+.navbar-admin a {
+    color: white; /* Linklerin yazı rengini beyaz yapar */
+}
 
 

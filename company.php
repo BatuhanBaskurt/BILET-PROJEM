@@ -86,9 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
-        // ======================================================================
-        // 🔥 GÜVENLİ LOGO YÜKLEME KISMI BURADA BİTİYOR 🔥
-        // ======================================================================
+
 
         if (!$error) {
             try {
@@ -122,15 +120,15 @@ $company = $stmt->fetch(PDO::FETCH_ASSOC);
 <title>Şirket Ayarları</title>
 <link rel="stylesheet" href="style.css">
 <style>
-    /* Kayma sorununu çözen kural */
+ 
     body {
         padding-top: 80px;
     }
     main {
-        max-width: 600px; /* Kupon sayfasındaki gibi daha dar ve şık */
+        max-width: 600px; 
         margin: 40px auto;
         padding: 30px;
-        background: rgba(255,255,255,0.1); /* Hafif beyaz, cam gibi */
+        background: rgba(255,255,255,0.1);
         backdrop-filter: blur(10px);
         border-radius: 12px;
         box-shadow: 0 8px 32px rgba(0,0,0,0.1);
@@ -138,68 +136,8 @@ $company = $stmt->fetch(PDO::FETCH_ASSOC);
     }
     h1 {
         text-align: center;
-        color: #333; /* Okunabilirlik için koyu renk */
+        color: #333; 
         margin-bottom: 30px;
-    }
-    .form-group {
-        margin-bottom: 25px;
-    }
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #555;
-    }
-    .form-group input[type="text"], .form-group input[type="file"] {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid rgba(0,0,0,0.1);
-        background: rgba(255,255,255,0.7); /* Hafif beyaz inputlar */
-        border-radius: 8px;
-        font-size: 16px;
-        box-sizing: border-box;
-        color: #333;
-    }
-    .current-logo {
-        margin-top: 10px;
-        font-size: 14px;
-        color: #555;
-        display: flex;
-        align-items: center;
-    }
-    .current-logo img {
-        max-height: 40px;
-        border-radius: 6px;
-        margin-right: 10px;
-        background: rgba(255,255,255,0.5);
-        padding: 2px;
-    }
-    .submit-btn {
-        width: 100%;
-        padding: 14px;
-        background: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-    .alert {
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-        font-weight: 500;
-    }
-    .alert-success { background: #e8f5e9; color: #2e7d32; }
-    .alert-error { background: #ffebee; color: #c62828; }
-    body.company-page {
-        background-image: url('foto/wallpaper.jpg'); /* Resmin yolu bu olmalı */
-        background-size: cover; /* Resmi ekrana sığdırır */
-        background-position: center; /* Resmi ortalar */
-        background-repeat: no-repeat; /* Resmin tekrarlanmasını engeller */
-        background-attachment: fixed; /* Kaydırma yapınca resim sabit kalır */
     }
 </style>
 </head>

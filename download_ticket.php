@@ -16,7 +16,6 @@ $ticket_id = $_GET['ticket_id'] ?? 0;
 $user_id = $_SESSION['user_id'];
 
 // 4. ADIM: VERİTABANI - Güvenli sorgu ile bilet bilgilerini çek
-// Sadece bilet ID'si DEĞİL, aynı zamanda o anki kullanıcıya ait olup olmadığını da kontrol ediyoruz.
 $stmt = $pdo->prepare("
     SELECT 
         t.id AS ticket_id, t.seat_number, t.total_price,

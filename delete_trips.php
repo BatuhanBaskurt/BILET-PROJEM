@@ -1,5 +1,4 @@
 <?php
-// delete_trips.php - API gibi, GET ile sil, JSON dönsün ama redirect veya confirm var
 include 'db.php';
 session_start();
 
@@ -14,8 +13,7 @@ if ($id) {
     try {
         $stmt = $pdo->prepare("DELETE FROM Trips WHERE id = ?");
         $stmt->execute([$id]);
-        // Sil sonra redirect ana sayfaya veya JSON
-        header("Location: trips_view.php"); // Veya echo json_encode(['success' => true]);
+        header("Location: trips_view.php"); 
         exit;
     } catch (PDOException $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);

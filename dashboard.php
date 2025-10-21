@@ -5,7 +5,7 @@ session_start();
 
 // Sadece admin girebilir
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: admin.php"); // login.php olmalı, dosya adını kontrol et
+    header("Location: admin.php"); 
     exit;
 }
 
@@ -24,127 +24,12 @@ $_SESSION['full_name'] = $user['full_name'];
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Navbar */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #dc3545;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    box-sizing: border-box; /* Önemli */
-    height: 60px; /* Sabit bir yükseklik verelim */
-    align-items: center; /* Dikeyde ortalamak için */
-    border-radius: 0;
-}
 
-.nav-left a, .nav-right a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-family: "Poppins", Arial, sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-/* 🔥 BÜTÜN SORUNU ÇÖZEN KOD BURADA (1/2) 🔥 */
-/* Body'e, navbar'ın yüksekliği kadar üstten boşluk veriyoruz */
-body {
-    padding-top: 60px; /* Navbar'ın yüksekliği kadar */
-    font-family: "Poppins", Arial, sans-serif;
-    background-color: #f4f7f6; /* Saydamlık yerine düz renk daha iyi olabilir */
-}
-
-
-/* Dashboard Ana Alanı */
-/* 🔥 GEREKSİZ BOŞLUĞU AZALTTIK (2/2) 🔥 */
-.dashboard {
-    max-width: 1200px;
-    margin: 30px auto; /* Üstteki 100px'i azalttık */
-    padding: 20px;
-    background-color: #ffffff; /* Saydamlık yerine beyaz */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.dashboard h1 {
-    text-align: center;
-    color: #dc3545;
-    margin-bottom: 10px; /* Boşluğu azalttım */
-    font-size: 2.2em;
-    font-weight: 700;
-}
-
-.dashboard h2 {
-    text-align: center;
-    color: #555; /* Rengi biraz yumuşattım */
-    margin-bottom: 40px;
-    font-size: 1.5em;
-    font-weight: 400;
-}
-
-/* Dashboard Kartları */
-.dashboard-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-}
-
-.dashboard-card {
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    border: 1px solid #eee;
-}
-
-.dashboard-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-.dashboard-card h3 {
-    color: #dc3545;
-    margin-bottom: 15px;
-    font-size: 1.5em;
-}
-
-.dashboard-card p {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.action-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #000;
-    color: white;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.action-btn:hover {
-    background-color: #333;
-    transform: translateY(-2px);
-}
 </style>
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar-admin">
     <div class="nav-left">
         <a href="dashboard.php">Ana Sayfa</a>
     </div>

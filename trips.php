@@ -1,8 +1,8 @@
 <?php
-// Hata raporlamayı açalım ki sorun olursa görelim
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-include 'db.php'; // PDO ile SQLite bağlantısı
+include 'db.php'; 
 session_start();
 // Sadece comp_admin girebilir
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'comp_admin') {
@@ -101,95 +101,13 @@ $trips = $trips_stmt->fetchAll(PDO::FETCH_ASSOC);
         --primary-color: #dc3545;
         --update-color: #007bff;
     }
-    /* Body ve arka plan */
-    body.company-page {
-        padding-top: 70px;
-        background-image: url('foto/wallpaper.jpg'); /* ← burası eklendi */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        padding-top: 200px;
-    }
     main {
         max-width: 1200px;
         margin: 100px auto 30px;
         padding: 25px;
-        
         border-radius: 15px; 
-        
     }
-    .company-title {
-        color: #000000ff;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    /* Konteynerlerin arkasındaki kutuları kaldırıyoruz */
-    .trip-form-container { margin-bottom: 40px; }
-    .trip-list-container { overflow-x: auto; }
-
-    /* 🔥 FOTOĞRAFTAKİ GİBİ DÜZENLİ FORM BURADA 🔥 */
-    .trip-form {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 sütunlu yapı */
-        gap: 20px;
-    }
-    .form-group {
-        display: flex;
-        flex-direction: column;
-    }
-    .trip-form label {
-        color: #ccc;
-        font-weight: 500;
-        margin-bottom: 8px;
-        font-size: 14px;
-    }
-    .trip-form input, .trip-form select {
-        padding: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        background: rgba(0, 0, 0, 1);
-        color: #000000ff;
-        border-radius: 8px;
-        font-size: 16px;
-    }
-    .trip-form option { background: #ffffffff; }
-    /* Butonun tam genişlikte olmasını sağlıyoruz */
-    .trip-form .form-group-full {
-        grid-column: 1 / -1;
-    }
-    .trip-form button {
-        width: 100%;
-        padding: 14px;
-        border: none;
-        border-radius: 8px;
-        background: var(--update-color);
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    /* Tablo stilleri aynı kalıyor */
-    .trip-table { width: 100%; border-collapse: collapse; color: #fff; }
-    .trip-table th, .trip-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
-    .trip-table thead th { background: rgba(255, 255, 255, 0.15); }
-    .trip-table input, .trip-table select { width: 100%; padding: 8px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; border-radius: 4px; box-sizing: border-box; }
-    .actions-cell { display: flex; gap: 8px; }
-    .btn { padding: 6px 12px; border-radius: 4px; border: none; color: white; text-decoration: none; font-weight: bold; cursor: pointer; text-align: center; }
-    .btn-update { background-color: var(--update-color); }
-    .btn-delete { background-color: var(--primary-color); }
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* Firefox için */
-    input[type=number] {
-        -moz-appearance: textfield;
-        
-        
-    }
+    
 </style>
 
 </head>

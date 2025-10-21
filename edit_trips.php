@@ -1,6 +1,4 @@
 <?php
-// edit_trips.php - API gibi çalışsın ama form görsel, GET ile id al, POST ile update
-
 
 include 'db.php';
 session_start();
@@ -31,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// GET: Form göster (görsel edit)
 $stmt = $pdo->prepare("SELECT * FROM Trips WHERE id = ?");
 $stmt->execute([$id]);
 $trip = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +45,6 @@ if (!$trip) {
 <meta charset="UTF-8">
 <title>Sefer Düzenle</title>
 <style>
-    /* Basit form stil, navbar yok çünkü API ama admin için */
     body { font-family: Arial; background: rgba(255,255,255,0.9); padding: 20px; }
     form { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; }

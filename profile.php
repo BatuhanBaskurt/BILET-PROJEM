@@ -29,61 +29,7 @@ if (!empty($user['company_id']) && $user['company_id'] != 0) {
 <title>Profilim</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.profile-container {
-    max-width: 600px;
-    margin: 120px auto 20px;
-    padding: 20px;
-    background: rgba(173, 216, 230, 0.35);
-    backdrop-filter: blur(14px) saturate(130%);
-    border-radius: 12px;
-}
-.profile-container h2 {
-    text-align: center;
-}
-.profile-info {
-    margin-bottom: 20px;
-}
-.profile-info p {
-    margin: 6px 0;
-    font-weight: 600;
-}
-.tickets-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-.tickets-table th, .tickets-table td {
-    border: 1px solid rgba(0,0,0,0.2);
-    padding: 8px 10px;
-    text-align: left;
-}
-.tickets-table th {
-    background: rgba(173,216,230,0.45);
-}
-/* Status badge'leri */
-.status-active {
-    background: rgba(76, 175, 80, 0.3);
-    color: #2e7d32;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-}
-.status-cancelled {
-    background: rgba(244, 67, 54, 0.3);
-    color: #c62828;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-}
-.status-expired {
-    background: rgba(158, 158, 158, 0.3);
-    color: #424242;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-}
+
 </style>
 </head>
 <body>
@@ -120,11 +66,11 @@ if (!empty($user['company_id']) && $user['company_id'] != 0) {
         $stmt2->execute([$_SESSION['user_id']]);
         $tickets = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         
-        // Otomatik status güncellemesi (geçmiş seferler expired olsun)
+        // Otomatik status güncellemesi 
         $now = date('Y-m-d H:i:s');
         foreach($tickets as &$ticket) {
             if ($ticket['status'] === 'active' && $ticket['departure_time'] < $now) {
-                // Geçmiş sefer, expired yap
+                
                 $updateStmt = $pdo->prepare("UPDATE Tickets SET status = 'expired' WHERE id = ?");
                 $updateStmt->execute([$ticket['id']]);
                 $ticket['status'] = 'expired';

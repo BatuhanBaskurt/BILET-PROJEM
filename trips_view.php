@@ -18,7 +18,7 @@ $stmt = $pdo->prepare("
 $stmt->execute();
 $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Inline update ve delete için POST işlemi
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'] ?? '';
     $id = $_POST['id'] ?? '';
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $stmt = $pdo->prepare("UPDATE Trips SET departure_city = ?, destination_city = ?, departure_time = ?, arrival_time = ?, price = ?, seat_count = ? WHERE id = ?");
             $stmt->execute([$departure_city, $destination_city, $departure_time, $arrival_time, $price, $seat_count, $id]);
         } catch (PDOException $e) {
-            // Hata yönetimi (Örn: echo "Hata: " . $e->getMessage();)
+            // Hata yönetimi 
         }
     } elseif ($action === 'delete' && $id) {
         try {
@@ -94,236 +94,18 @@ if (isset($_POST['create_trip'])) {
 <title>Sefer Yönetimi</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Navbar - users.php ve companies.php ile tamamen aynı */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0; /* Sol boşluğu sıfırla */
-    right: 0; /* Sağ boşluğu sıfırla */
-    width: 100%;
-    background-color: #dc3545;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Dikeyde ortala */
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    box-sizing: border-box; /* Padding'i genişliğe dahil et */
-    border-radius: 0;
-}
-
-.nav-left a, .nav-right a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-family: "Poppins", Arial, sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    transition: color 0.3s ease;
-}
-
-.nav-right a:hover, .nav-left a:hover {
-    color: #f0f0f0;
-}
-
-/* Body ve container - users.php gibi */
 body {
     background-color: #f4f7f6;
     margin: 0;
     padding: 0;
     font-family: "Poppins", Arial, sans-serif;
-    padding-top: 200px;
-}
-
-.user-container {
-    max-width: 1400px;
-    margin: 100px auto 40px; /* Navbar için üst boşluk */
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.user-container h1, .user-container h2 {
-    text-align: center;
-    color: #dc3545;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    font-weight: 700;
-}
-
-/* Sefer şeması ve listesi */
-.trip-schema {
-    display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 1.5fr 2fr 2fr 1.5fr;
-    gap: 10px;
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #333;
-    align-items: center;
-}
-
-.trip-list {
-    list-style: none;
-    padding: 0;
-}
-
-.trip-item {
-    display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 1.5fr 2fr 2fr 1.5fr;
-    gap: 10px;
-    align-items: center;
-    padding: 15px;
-    background: #fff;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eee;
-}
-
-.trip-input {
-    color: #333;
-    font-size: 14px; /* Biraz daha küçük font */
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    background: #fff;
-    width: 100%;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-.trip-input:focus {
-    border-color: #dc3545;
-    outline: none;
-}
-
-.trip-item .action-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.action-btn {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #000000ff; /* Yeşil renk */
-    color: white;
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
-
-.action-btn.delete {
-    background-color: #dc3545; /* Kırmızı renk */
-}
-
-.action-btn:hover {
-    background-color: #218838;
-}
-
-.action-btn.delete:hover {
-    background-color: #c82333;
-}
-
-/* ===== SEFER OLUŞTUR BÖLÜMÜ (DÜZELTİLDİ) ===== */
-.trip-create {
-    background-color: #f8f9fa;
-    padding: 25px;
-    border-radius: 8px;
-    margin-top: 60px; /* Üstteki listeden ayrı dursun */
-    border: 1px solid #eee;
-}
-
-.trip-create form {
-    display: grid;
-    /* 7 eleman için 7 sütun */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    align-items: center;
-}
-
-.create-input {
-    color: #333;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    background: #fff;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.create-input::placeholder {
-    color: #999;
-}
-
-.trip-create button {
-    /* Formda 7 input varsa, 7 sütunu da kaplasın. Responsive için 1/-1 daha garanti */
-    grid-column: 1 / -1; 
-    padding: 12px;
-    background: #000;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    margin-top: 15px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.trip-create button:hover {
-    background-color: #333;
-}
-
-/* Responsive Düzenlemeler */
-@media (max-width: 1200px) {
-    .trip-schema, .trip-item {
-        grid-template-columns: repeat(5, 1fr); /* Daha az sütun */
-    }
-    .trip-item .action-buttons {
-        grid-column: 1 / -1; /* Butonlar alta insin */
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .user-container {
-        margin: 80px 10px 20px;
-        padding: 15px;
-    }
-    
-    .trip-schema {
-        display: none; /* Mobilde şemayı gizle, yer kaplamasın */
-    }
-    
-    .trip-item, .trip-create form {
-        grid-template-columns: 1fr; /* Her şey alt alta */
-        text-align: center;
-    }
-    
-    /* Mobilde inputların önüne ne olduklarını yazalım (pseudo-element ile) */
-    .trip-item span:before, .trip-item input:before, .trip-item select:before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-        color: #dc3545;
-    }
-
-    .trip-item .action-buttons {
-        gap: 15px;
-        margin-top: 10px;
-    }
+    padding-top: 220px;
 }
 </style>
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar-admin">
     <div class="nav-left">
         <a href="dashboard.php">Anasayfa</a>
     </div>

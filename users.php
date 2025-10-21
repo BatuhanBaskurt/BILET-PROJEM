@@ -42,118 +42,12 @@ $companies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <title>Kullanıcı Yönetimi</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* CSS koduna dokunmadım, aynen bıraktım */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #dc3545;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-radius: 0;
-}
-.nav-left a, .nav-right a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-family: "Poppins", Arial, sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-}
-.user-container {
-    max-width: 1200px;
-    margin: 100px auto 20px;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: "Poppins", Arial, sans-serif;
-}
-.user-container h1 {
-    text-align: center;
-    color: #dc3545;
-    margin-bottom: 40px;
-    font-size: 2.5em;
-    font-weight: 700;
-}
-.user-schema, .user-item {
-    display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1.5fr 1.5fr 1fr; 
-    gap: 15px;
-    align-items: center;
-}
-.user-schema {
-    background-color: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-weight: 600;
-    color: #333;
-}
-.user-list {
-    list-style: none;
-    padding: 0;
-}
-.user-item {
-    padding: 15px;
-    background: #fff;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(220, 53, 69, 0.2);
-}
-.user-item span {
-    color: #333;
-    font-size: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.user-item .role-select, .user-item .company-select {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    width: 100%;
-    box-sizing: border-box;
-}
-.user-item .company-cell.hidden {
-    visibility: hidden;
-}
-.user-item .actions-cell {
-    grid-column: 6;
-}
-.save-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #000;
-    color: white;
-    font-weight: 600;
-    margin-top: 20px;
-    display: block;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
-.delete-btn {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 6px;
-    background-color: #dc3545;
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-}
+
 </style>
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar-admin">
     <div class="nav-left">
         <a href="dashboard.php">Ana Sayfa</a>
     </div>

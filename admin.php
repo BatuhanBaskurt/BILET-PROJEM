@@ -1,8 +1,5 @@
 <?php
-// 1. ÖNCE KURALLAR VE DB BAĞLANTISI
 include 'db.php'; 
-
-// 2. SONRA GÜVENLİ KURALLARLA SESSION BAŞLATILIR
 session_start();
 
 // Eğer kullanıcı zaten admin olarak giriş yapmışsa, onu direkt panele yolla
@@ -11,7 +8,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin') {
     exit;
 }
 
-// 3. CSRF KORUMASI EKLENDİ
+
 // Eğer session'da token yoksa, yeni bir tane oluştur
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -20,7 +17,6 @@ if (empty($_SESSION['csrf_token'])) {
 $message = '';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // 4. CSRF KONTROLÜ EKLENDİ
     // Formdan gelen token ile session'daki token eşleşiyor mu?
     if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         $message = "Geçersiz istek! Lütfen tekrar deneyin.";
@@ -35,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if ($user && password_verify($password, $user['password'])) {
                 if ($user['role'] !== 'admin') {
-                    // Rol uymasa bile genel bir hata mesajı ver. Saldırgana ipucu verme.
+                    // Rol uymasa bile genel bir hata mesajı ver.
                     $message = "Hatalı email veya şifre.";
                 } else {
                     // Başarılı giriş
@@ -45,11 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['role'] = $user['role'];
                     $_SESSION['full_name'] = $user['full_name'];
-                    // Admin'in bakiye bilgisine genellikle gerek olmaz ama kalsın
                     $_SESSION['balance'] = $user['balance'];
                     
-                    // !!! KRİTİK GÜVENLİK AÇIĞI YARATAN setcookie KODU BURADAN TAMAMEN SİLİNDİ !!!
-
+                
                     header("Location: dashboard.php"); // admin paneline yönlendir
                     exit();
                 }

@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user_id && $role && $role !== 'admin') {
         try {
-            // User rolünde company_id 0 olabilir, Firma Admin'de zorunlu
             $stmt = $pdo->prepare("UPDATE User SET role = ?, company_id = ? WHERE id = ?");
             $stmt->execute([$role, $company_id === '0' && $role === 'user' ? null : $company_id, $user_id]);
             $response['success'] = true;

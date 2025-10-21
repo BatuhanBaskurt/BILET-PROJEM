@@ -1,5 +1,5 @@
 <?php
-// Hata raporlamayı açalım ki sorun olursa görelim
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -95,119 +95,7 @@ $coupons = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Kupon Ekle</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .coupon-form-container {
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 30px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-        .coupon-form-container h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .submit-btn:hover {
-            background: #45a049;
-        }
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .alert-success {
-            background: rgba(76, 175, 80, 0.2);
-            color: #2e7d32;
-            border: 1px solid #4CAF50;
-        }
-        .alert-error {
-            background: rgba(244, 67, 54, 0.2);
-            color: #c62828;
-            border: 1px solid #f44336;
-        }
-        .coupons-list {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        .coupons-list h3 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .coupon-item {
-            background: rgba(255,255,255,0.8);
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .coupon-info strong {
-            color: #4CAF50;
-            font-size: 18px;
-        }
-        .coupon-details {
-            font-size: 14px;
-            color: #666;
-        }
-        .coupon-actions a {
-            margin-left: 10px;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 6px 12px;
-            border-radius: 6px;
-            color: white;
-        }
-        .edit-btn {
-            background-color: #2196F3;
-        }
-        .delete-btn {
-            background-color: #f44336;
-        }
-        .delete-btn:hover {
-            background-color: #d32f2f;
-        }
-        .edit-btn:hover {
-            background-color: #1976D2;
-        }
+        
     </style>
 </head>
 <body>

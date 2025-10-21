@@ -90,131 +90,17 @@ $companies = $pdo->query("SELECT id, name FROM Bus_Company")->fetchAll(PDO::FETC
 <title>Kupon Yönetimi</title>
 <link rel="stylesheet" href="style.css">
 <style>
-    /* 1. KAYMA SORUNUNU ÇÖZEN KURAL */
     body {
-        padding-top: 80px; /* Navbar için güvenli bir boşluk */
-        background-color: #f4f7f6; /* Sayfa arka planı */
+        padding-top: 200px; 
+        background-color: #f4f7f6; 
         font-family: "Poppins", Arial, sans-serif;
-        margin: 0; /* Tarayıcı varsayılan boşluğunu sıfırla */
-    }
-    .navbar {
-        position: fixed;
-        top: 0;
-        left: 0; /* Önemli */
-        right: 0; /* Önemli */
-        width: 100%;
-        background-color: #dc3545;
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        height: 60px; /* Sabit yükseklik */
-        box-sizing: border-box;
-        border-radius: 0;
-    }
-    .nav-left a, .nav-right a {
-        color: white;
-        text-decoration: none;
-        margin: 0 15px;
-        font-weight: 600;
-        font-size: 16px;
-    }
-    /* Ana Konteyner */
-    .user-container {
-        max-width: 1200px;
-        margin: 30px auto; /* Üstteki gereksiz boşluk kaldırıldı */
-        padding: 25px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    }
-    .user-container h1, .user-container h2 {
-        text-align: center;
-        color: #dc3545;
-        margin-bottom: 30px;
-    }
-    /* Kupon Listesi */
-    .coupon-schema, .coupon-item {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1.5fr 1.5fr 1.5fr;
-        gap: 15px;
-        align-items: center;
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-    .coupon-schema {
-        background-color: #f8f9fa;
-        font-weight: 600;
-    }
-    .coupon-item {
-        background: #fff;
-        border: 1px solid #eee;
-    }
-    .coupon-list { list-style: none; padding: 0; }
-    .coupon-item input, .coupon-item select {
-        padding: 8px;
-        border-radius: 6px;
-        border: 1px solid #ddd;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .action-buttons { 
-        display: flex;
-        gap: 10px;
-    }
-    .action-btn {
-        padding: 8px 15px;
-        border: none;
-        border-radius: 6px;
-        background-color: #000;
-        color: white;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
-        flex: 1; /* Butonların eşit genişlemesi için */
-    }
-    .action-btn.delete {
-        background-color: #dc3545;
-    }
-    /* Yeni Kupon Oluşturma Formu */
-    .coupon-create {
-        margin-top: 40px;
-        padding-top: 30px;
-        border-top: 1px solid #eee;
-    }
-    .coupon-create form {
-        max-width: 800px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
-    }
-    .coupon-create input, .coupon-create select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        box-sizing: border-box;
-    }
-    .coupon-create button {
-        grid-column: 1 / -1; /* Buton tam genişlik kaplasın */
-        padding: 12px;
-        border: none;
-        border-radius: 6px;
-        background-color: #000;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
+        margin: 0; 
     }
 </style>
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar-admin">
     <div class="nav-left">
         <a href="dashboard.php">Ana Sayfa</a>
     </div>

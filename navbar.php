@@ -1,8 +1,8 @@
 <nav class="navbar">
     <div class="nav-left">
         <?php
-            // Anasayfa linki role göre
-            $home_link = 'index.php'; // default
+
+            $home_link = 'index.php'; 
             if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
                 $home_link = 'dashboard.php';
             }
@@ -12,7 +12,7 @@
 
     <div class="nav-right">
         <?php if (!isset($_SESSION['user_id'])): ?>
-            <!-- Guest -->
+
             <a href="login.php">Giriş Yap</a>
             <a href="register.php">Kayıt Ol</a>
 
