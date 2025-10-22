@@ -1,16 +1,16 @@
 <?php
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include 'db.php'; 
 session_start();
+
 // Sadece comp_admin girebilir
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'comp_admin') {
     header("Location: index.php");
     exit;
 }
 
-// 1. ADIM: Giriş yapan adminin ŞİRKET ID'sini alıyoruz
+// Şirket ID'sini al
 $stmt = $pdo->prepare("SELECT company_id FROM User WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,64 +23,110 @@ if (!$company_id) {
 // Şehir listesi
 $cities = ["Adana","Adıyaman","Afyonkarahisar","Ağrı","Amasya","Ankara","Antalya","Artvin","Aydın","Balıkesir","Bilecik","Bingöl","Bitlis","Bolu","Burdur","Bursa","Çanakkale","Çankırı","Çorum","Denizli","Diyarbakır","Edirne","Elazığ","Erzincan","Erzurum","Eskişehir","Gaziantep","Giresun","Gümüşhane","Hakkari","Hatay","Isparta","Mersin","İstanbul","İzmir","Kars","Kastamonu","Kayseri","Kırklareli","Kırşehir","Kocaeli","Konya","Kütahya","Malatya","Manisa","Kahramanmaraş","Mardin","Muğla","Muş","Nevşehir","Niğde","Ordu","Rize","Sakarya","Samsun","Siirt","Sinop","Sivas","Tekirdağ","Tokat","Trabzon","Tunceli","Şanlıurfa","Uşak","Van","Yozgat","Zonguldak","Aksaray","Bayburt","Karaman","Kırıkkale","Batman","Şırnak","Bartın","Ardahan","Iğdır","Yalova","Karabük","Kilis","Osmaniye","Düzce"];
 
-// 2. ADIM: Link ile gelen SİLME isteğini burada yakalıyoruz
+// Silme işlemi
 if (isset($_GET['delete'])) {
     $delete_id = (int)$_GET['delete'];
-    $stmt = $pdo->prepare("DELETE FROM Trips WHERE id = ? AND company_id = ?");
-    $stmt->execute([$delete_id, $company_id]);
-    header("Location: trips.php");
-    exit;
+    try {
+        $stmt = $pdo->prepare("SELECT id FROM Trips WHERE id = ? AND company_id = ?");
+        $stmt->execute([$delete_id, $company_id]);
+        if ($stmt->fetch()) {
+            $stmt = $pdo->prepare("DELETE FROM Trips WHERE id = ? AND company_id = ?");
+            $stmt->execute([$delete_id, $company_id]);
+            $form_error = "Sefer silindi!";
+        } else {
+            $form_error = "Geçersiz veya yetkisiz sefer ID.";
+        }
+    } catch (PDOException $e) {
+        $form_error = "Silme hatası: " . $e->getMessage();
+    }
 }
 
-// 3. ADIM: Formdan gelen EKLEME ve GÜNCELLEME isteklerini burada yakalıyoruz
+// Form işlemleri
 $form_error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // A) YENİ SEFER EKLEME
+    // Yeni sefer ekleme
     if (isset($_POST['add_trip'])) {
-        $departure = trim($_POST['departure_city']);
-        $destination = trim($_POST['destination_city']);
-        $departure_time = str_replace('T', ' ', $_POST['departure_time']) . ':00';
-        $arrival_time = str_replace('T', ' ', $_POST['arrival_time']) . ':00';
+        $departure = trim($_POST['departure_city'] ?? '');
+        $destination = trim($_POST['destination_city'] ?? '');
+        $departure_time = !empty($_POST['departure_time']) ? str_replace('T', ' ', $_POST['departure_time']) . ':00' : '';
+        $arrival_time = !empty($_POST['arrival_time']) ? str_replace('T', ' ', $_POST['arrival_time']) . ':00' : '';
         $seat_count = (int)($_POST['seat_count'] ?? 0);
         $price = (float)($_POST['price'] ?? 0);
 
-        // Kalkış saati varış saatinden önce olmalı kontrolü
-        $departure_timestamp = strtotime($departure_time);
-        $arrival_timestamp = strtotime($arrival_time);
-        if ($departure_timestamp >= $arrival_timestamp) {
-            $form_error = "Kalkış saati varış saatinden önce olmalıdır.";
-        } elseif ($departure && $destination && $seat_count > 0 && $price >= 0) {
-            $stmt = $pdo->prepare("INSERT INTO Trips (company_id, departure_city, destination_city, departure_time, arrival_time, seat_count, price) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$company_id, $departure, $destination, $departure_time, $arrival_time, $seat_count, $price]);
+        if (empty($departure) || empty($destination) || empty($departure_time) || empty($arrival_time)) {
+            $form_error = "Tüm alanlar zorunlu.";
+        } elseif ($seat_count <= 0) {
+            $form_error = "Koltuk sayısı sıfırdan büyük olmalı.";
+        } elseif ($price < 0) {
+            $form_error = "Fiyat negatif olamaz.";
+        } elseif (!in_array($departure, $cities) || !in_array($destination, $cities)) {
+            $form_error = "Geçersiz şehir seçimi.";
         } else {
-            $form_error = "Lütfen tüm alanları doğru doldurun.";
+            $departure_timestamp = strtotime($departure_time);
+            $arrival_timestamp = strtotime($arrival_time);
+            if ($departure_timestamp === false || $arrival_timestamp === false) {
+                $form_error = "Geçersiz tarih formatı.";
+            } elseif ($departure_timestamp >= $arrival_timestamp) {
+                $form_error = "Kalkış saati varış saatinden önce olmalı.";
+            } else {
+                try {
+                    $stmt = $pdo->prepare("INSERT INTO Trips (company_id, departure_city, destination_city, departure_time, arrival_time, seat_count, price) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->execute([$company_id, $departure, $destination, $departure_time, $arrival_time, $seat_count, $price]);
+                    $form_error = "Sefer eklendi!";
+                } catch (PDOException $e) {
+                    $form_error = "Ekleme hatası: " . $e->getMessage();
+                }
+            }
         }
     }
-    // B) MEVCUT SEFERİ GÜNCELLEME
+    // Sefer güncelleme
     elseif (isset($_POST['update_trip'])) {
-        $trip_id = (int)$_POST['trip_id'];
-        $departure = trim($_POST['departure_city']);
-        $destination = trim($_POST['destination_city']);
-        $departure_time = str_replace('T', ' ', $_POST['departure_time']) . ':00';
-        $arrival_time = str_replace('T', ' ', $_POST['arrival_time']) . ':00';
-        $seat_count = (int)$_POST['seat_count'];
-        $price = (float)$_POST['price'];
+        $trip_id = (int)($_POST['trip_id'] ?? 0);
+        $departure = trim($_POST['departure_city'] ?? '');
+        $destination = trim($_POST['destination_city'] ?? '');
+        $departure_time = !empty($_POST['departure_time']) ? str_replace('T', ' ', $_POST['departure_time']) . ':00' : '';
+        $arrival_time = !empty($_POST['arrival_time']) ? str_replace('T', ' ', $_POST['arrival_time']) . ':00' : '';
+        $seat_count = (int)($_POST['seat_count'] ?? 0);
+        $price = (float)($_POST['price'] ?? 0);
 
-        // Kalkış saati varış saatinden önce olmalı kontrolü
-        $departure_timestamp = strtotime($departure_time);
-        $arrival_timestamp = strtotime($arrival_time);
-        if ($departure_timestamp >= $arrival_timestamp) {
-            $form_error = "Kalkış saati varış saatinden önce olmalıdır.";
+        if ($trip_id <= 0) {
+            $form_error = "Geçersiz sefer ID.";
+        } elseif (empty($departure) || empty($destination) || empty($departure_time) || empty($arrival_time)) {
+            $form_error = "Tüm alanlar zorunlu.";
+        } elseif ($seat_count <= 0) {
+            $form_error = "Koltuk sayısı sıfırdan büyük olmalı.";
+        } elseif ($price < 0) {
+            $form_error = "Fiyat negatif olamaz.";
+        } elseif (!in_array($departure, $cities) || !in_array($destination, $cities)) {
+            $form_error = "Geçersiz şehir seçimi.";
         } else {
-            $stmt = $pdo->prepare("UPDATE Trips SET departure_city = ?, destination_city = ?, departure_time = ?, arrival_time = ?, seat_count = ?, price = ? WHERE id = ? AND company_id = ?");
-            $stmt->execute([$departure, $destination, $departure_time, $arrival_time, $seat_count, $price, $trip_id, $company_id]);
+            $departure_timestamp = strtotime($departure_time);
+            $arrival_timestamp = strtotime($arrival_time);
+            if ($departure_timestamp === false || $arrival_timestamp === false) {
+                $form_error = "Geçersiz tarih formatı.";
+            } elseif ($departure_timestamp >= $arrival_timestamp) {
+                $form_error = "Kalkış saati varış saatinden önce olmalı.";
+            } else {
+                try {
+                    // Seferin şirkete ait olduğunu doğrula
+                    $stmt = $pdo->prepare("SELECT id FROM Trips WHERE id = ? AND company_id = ?");
+                    $stmt->execute([$trip_id, $company_id]);
+                    if ($stmt->fetch()) {
+                        $stmt = $pdo->prepare("UPDATE Trips SET departure_city = ?, destination_city = ?, departure_time = ?, arrival_time = ?, seat_count = ?, price = ? WHERE id = ? AND company_id = ?");
+                        $stmt->execute([$departure, $destination, $departure_time, $arrival_time, $seat_count, $price, $trip_id, $company_id]);
+                        $form_error = "Sefer güncellendi!";
+                    } else {
+                        $form_error = "Geçersiz veya yetkisiz sefer ID.";
+                    }
+                } catch (PDOException $e) {
+                    $form_error = "Güncelleme hatası: " . $e->getMessage();
+                }
+            }
         }
     }
-    header("Location: trips.php");
-    exit;
 }
 
-// Şirket bilgileri ve seferleri çek
+// Şirket ve seferleri çek
 $company = $pdo->prepare("SELECT * FROM Bus_Company WHERE id = ?");
 $company->execute([$company_id]);
 $company = $company->fetch(PDO::FETCH_ASSOC);
@@ -107,14 +153,10 @@ $trips = $trips_stmt->fetchAll(PDO::FETCH_ASSOC);
         padding: 25px;
         border-radius: 15px; 
     }
-    
 </style>
-
 </head>
 <body class="company-page">
-
 <?php include 'navbar.php'; ?>
-
 <main>
     <h2 class="company-title"><?= htmlspecialchars($company['name'] ?? 'Şirket') ?> - Sefer Yönetimi</h2>
 
@@ -148,11 +190,11 @@ $trips = $trips_stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="form-group">
                 <label for="add_seat">Koltuk</label>
-                <input type="number" id="add_seat" name="seat_count"  min="1" required>
+                <input type="number" id="add_seat" name="seat_count" min="1" required>
             </div>
             <div class="form-group">
                 <label for="add_price">Fiyat (TL)</label>
-                <input type="number" id="add_price" name="price"  min="0" step="0.01" required>
+                <input type="number" id="add_price" name="price" min="0" step="0.01" required>
             </div>
             <div class="form-group form-group-full">
                 <button type="submit" name="add_trip">Yeni Sefer Ekle</button>
@@ -205,6 +247,5 @@ $trips = $trips_stmt->fetchAll(PDO::FETCH_ASSOC);
         </table>
     </div>
 </main>
-
 </body>
 </html>
