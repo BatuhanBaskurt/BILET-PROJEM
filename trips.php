@@ -153,6 +153,9 @@ $trips = $trips_stmt->fetchAll(PDO::FETCH_ASSOC);
         padding: 25px;
         border-radius: 15px; 
     }
+    body{
+    padding-top: 200px; 
+    }
 </style>
 </head>
 <body class="company-page">
