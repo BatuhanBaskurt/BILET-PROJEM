@@ -2184,5 +2184,86 @@ body.company-page {
 .navbar-admin a {
     color: white; /* Linklerin yazı rengini beyaz yapar */
 }
+/* ======================================== */
+/* YENİ SEFER OLUŞTURMA (trip_view.php) - SON HALİ */
+/* ======================================== */
+
+.trip-create {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+}
+
+/* Başlığı kırmızı yapan kod */
+.trip-create h2 {
+    text-align: center;
+    color: #dc3545;  /* <-- Bu senin istediğin kırmızı başlık */
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* 1. Formun kendisi (Flexbox) */
+.trip-create form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* 2. Tüm input/select kutuları (Yan yana dizen kod) */
+.trip-create .create-input {
+    flex-grow: 1;
+    min-width: 250px; 
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box; 
+    
+    /* YENİ EKLENDİ: Kutunun içine yazılan YAZI RENGİ (siyah olsun) */
+    color: #333;
+}
+
+/* * YENİ EKLENDİ: Placeholder'ın rengini gri yapar
+ * (Artık beyaz olmayacak) 
+ */
+.trip-create .create-input::placeholder {
+    color: #999;
+    opacity: 1; /* Firefox için garanti */
+}
+.trip-create .create-input::-webkit-input-placeholder {
+    color: #999;
+}
+.trip-create .create-input::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+}
+.trip-create .create-input:-ms-input-placeholder {
+    color: #999;
+}
+
+
+/* 3. Kırmızı Buton */
+.trip-create form button {
+    width: 100%; 
+    padding: 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.trip-create form button:hover {
+    background-color: #c82333;
+}
 
 
